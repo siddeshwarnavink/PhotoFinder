@@ -49,9 +49,13 @@
         removeFavourite(currentRemoveFeed);
         currentRemoveFeed = null;
     }
+
+    function closeRemoveFeedPopupHandler() {
+        currentRemoveFeed = null;
+    }
 </script>
 
-<Popup show={currentRemoveFeed} on:toggle={removeFeedFromFavouriteHandler}>
+<Popup show={currentRemoveFeed} on:toggle={closeRemoveFeedPopupHandler} on:confirm={removeFeedFromFavouriteHandler}>
     <p>Are you sure to remove from favourite?</p>
 </Popup>
 

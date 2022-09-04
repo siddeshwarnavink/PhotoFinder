@@ -22,6 +22,10 @@
     function togglePopupHandler() {
         dispatch("toggle");
     }
+
+    function confirmPopupHandler() {
+        dispatch("confirm");
+    }
 </script>
 
 {#if show}
@@ -34,7 +38,7 @@
         out:fly={{ y: -200, duration: 600 }}
     >
         <slot />
-        <button on:click={togglePopupHandler}>Yes</button>
+        <button on:click={confirmPopupHandler}>Yes</button>
     </div>
 {/if}
 
