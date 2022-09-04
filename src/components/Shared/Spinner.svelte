@@ -1,4 +1,18 @@
-<div class="loader">Loading...</div>
+<script>
+    import { settings } from "../../settings-store";
+
+    let isDarkMode = false;
+
+    settings.subscribe((settingsList) => {
+        const darkModeSetting = settingsList.find(
+            (setting) => setting.id === "dark-mode"
+        );
+
+        isDarkMode = darkModeSetting.value;
+    });
+</script>
+
+<div class="loader" class:darkMode={isDarkMode}>Loading...</div>
 
 <style>
     .loader,
@@ -47,6 +61,10 @@
         transform-origin: 0.1em 5.1em;
         -webkit-animation: load2 2s infinite ease;
         animation: load2 2s infinite ease;
+    }
+    .loader.darkMode::before,
+    .loader.darkMode::after {
+        background: #333333 !important;
     }
     @-webkit-keyframes load2 {
         0% {

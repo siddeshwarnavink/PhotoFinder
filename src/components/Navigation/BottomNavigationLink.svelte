@@ -1,9 +1,21 @@
 <script>
     import { Link } from "svelte-routing";
 
+    import { settings } from "../../settings-store";
+
     export let to = "";
     export let label;
     export let icon;
+
+    let isDarkMode = false;
+
+    settings.subscribe((settingsList) => {
+        const darkModeSetting = settingsList.find(
+            (setting) => setting.id === "dark-mode"
+        );
+
+        isDarkMode = darkModeSetting.value;
+    });
 
     function getProps({ location, href, isPartiallyCurrent, isCurrent }) {
         const isActive =
@@ -18,7 +30,7 @@
 </script>
 
 <Link {to} {getProps}>
-    <div class="nav-link">
+    <div class="nav-link" class:darkMode={isDarkMode}>
         <span class="material-icons">{icon}</span>
         <span class="nav-label">{label}</span>
     </div>
@@ -27,12 +39,11 @@
 <style>
     :global(a) {
         text-decoration: none;
-        color: #000;
         padding: 12px 16px;
         outline: none;
     }
 
-    :global(a.active) {
+    :global(a.active) .nav-link {
         color: #ec2e67;
         font-weight: bold;
     }
@@ -41,6 +52,11 @@
         display: flex;
         flex-direction: column;
         text-align: center;
+        color: #000;
+    }
+
+    .nav-link.darkMode {
+        color: #fff;
     }
 
     .material-icons,
@@ -48,7 +64,7 @@
         display: block;
     }
 
-    .nav-label  {
-        font-size: .8em;
+    .nav-label {
+        font-size: 0.8em;
     }
 </style>

@@ -1,11 +1,23 @@
 <script>
     import { createEventDispatcher } from "svelte";
 
+    import { settings } from "../../settings-store";
+
     import Button from "../Shared/Button.svelte";
 
     export let feedData;
 
+    let isDarkMode = false;
+
     const dispatch = createEventDispatcher();
+
+    settings.subscribe((settingsList) => {
+        const darkModeSetting = settingsList.find(
+            (setting) => setting.id === "dark-mode"
+        );
+
+        isDarkMode = darkModeSetting.value;
+    });
 
     function onRemoveHandler() {
         dispatch("remove");
@@ -16,7 +28,7 @@
     }
 </script>
 
-<div class="favourite-item">
+<div class="favourite-item" class:darkMode={isDarkMode}>
     <div
         class="thumbnail"
         style="background-image: url('{feedData.src.small}');"
@@ -37,6 +49,12 @@
     .favourite-item {
         background-color: #ccc;
         border-radius: 10px;
+    }
+
+    .favourite-item.darkMode,
+    .favourite-item.darkMode .thumbnail::after {
+        background-color: #1a1a1a !important;
+        color: #fff;
     }
 
     .favourite-item .thumbnail {

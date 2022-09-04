@@ -3,10 +3,21 @@
     import { fly } from "svelte/transition";
 
     import Backdrop from "../Shared/Backdrop.svelte";
+    import { settings } from "../../settings-store";
 
     export let show = false;
 
+    let isDarkMode = false;
+
     const dispatch = createEventDispatcher();
+
+    settings.subscribe((settingsList) => {
+        const darkModeSetting = settingsList.find(
+            (setting) => setting.id === "dark-mode"
+        );
+
+        isDarkMode = darkModeSetting.value;
+    });
 
     function togglePopupHandler() {
         dispatch("toggle");
@@ -18,6 +29,7 @@
 
     <div
         class="popup"
+        class:darkMode={isDarkMode}
         in:fly={{ y: -200, duration: 500 }}
         out:fly={{ y: -200, duration: 600 }}
     >
@@ -35,6 +47,11 @@
         width: 350px;
         position: absolute;
         left: 40%;
+    }
+
+    .popup.darkMode {
+        background-color: #333333 !important;
+        color: white;
     }
 
     .popup button {
@@ -56,6 +73,7 @@
     @media (max-width: 600px) {
         .popup {
             left: 5%;
+            top: 25%;
             width: 90vw;
         }
     }

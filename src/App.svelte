@@ -7,10 +7,10 @@
 	import Favourites from "./pages/Favourites.svelte";
 	import Feed from "./pages/Feed.svelte";
 	import Settings from "./pages/Settings.svelte";
+	import BottomNavigation from "./components/Navigation/BottomNavigation.svelte";
 	import { notifications } from "./notification-store";
 	import { fetchPastFavourites } from "./favourite-store";
-	import { fetchPastSettings } from "./settings-store";
-	import BottomNavigation from "./components/Navigation/BottomNavigation.svelte";
+	import { settings, fetchPastSettings } from "./settings-store";
 
 	export let url = "";
 
@@ -23,6 +23,20 @@
 
 	notifications.subscribe((notifications) => {
 		notificationList = [...notifications];
+	});
+
+	settings.subscribe((settingsList) => {
+		const darkModeSetting = settingsList.find(
+			(setting) => setting.id === "dark-mode"
+		);
+
+		if (darkModeSetting.value) {
+			document.body.style.backgroundColor = "#333333";
+			document.body.style.color = "#fff";
+		} else {
+			document.body.style.backgroundColor = "#efefef";
+			document.body.style.color = "#000";
+		}
 	});
 </script>
 
