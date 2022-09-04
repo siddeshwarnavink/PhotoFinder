@@ -3,6 +3,7 @@
     import FavouritesGrid from "../components/Favourites/FavouritesGrid.svelte";
     import FavouritesItem from "../components/Favourites/FavouritesItem.svelte";
     import Popup from "../components/Shared/Popup.svelte";
+    import PageJumbotron from "../components/Shared/PageJumbotron.svelte";
     import { favourites } from "../favourite-store";
     import { pushNotification } from "../notification-store";
 
@@ -50,12 +51,10 @@
     on:close={closeSelectedFeedHandler}
 />
 
-<header>
-    <h1 class="page-caption">Favourites</h1>
-    {#if favouriteList.length === 0}
-        <p class="page-subcaption">No favourite added.</p>
-    {/if}
-</header>
+<PageJumbotron
+    caption="Favourites"
+    subcaption={favouriteList.length === 0 ? "No favourite added." : ""}
+/>
 
 <FavouritesGrid>
     {#each favouriteList as feedData}
@@ -66,23 +65,3 @@
         />
     {/each}
 </FavouritesGrid>
-
-<style>
-    header {
-        padding: 24px 0;
-    }
-
-    .page-caption,
-    .page-subcaption {
-        text-align: center;
-    }
-
-    .page-caption {
-        font-size: 2em;
-    }
-
-    .page-subcaption {
-        margin: 0;
-        padding: 0;
-    }
-</style>

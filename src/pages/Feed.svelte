@@ -5,6 +5,7 @@
     import FeedGrid from "../components/Feed/FeedGrid.svelte";
     import FeedGridItem from "../components/Feed/FeedGridItem.svelte";
     import FeedLightbox from "../components/Feed/FeedLightbox.svelte";
+    import PageJumbotron from "../components/Shared/PageJumbotron.svelte";
 
     let isLoading = false;
     let photoFeed = [];
@@ -31,18 +32,18 @@
     }
 
     function closeSelectedFeedHandler() {
-        selectedFeed = {}   
+        selectedFeed = {};
     }
 </script>
 
-<header>
-    <h1 class="page-caption">Gallery feed</h1>
-    <p class="page-subcaption">Our collections of quality photos!</p>
-</header>
+<PageJumbotron
+    caption="Gallery feed"
+    subcaption="Our collections of quality photos!"
+/>
 
 <FeedLightbox
     show={Object.keys(selectedFeed).length > 0}
-    selectedFeed={selectedFeed}
+    {selectedFeed}
     on:close={closeSelectedFeedHandler}
 />
 
@@ -61,23 +62,3 @@
         </FeedGrid>
     {/if}
 </div>
-
-<style>
-    header {
-        padding: 24px 0;
-    }
-
-    .page-caption,
-    .page-subcaption {
-        text-align: center;
-    }
-
-    .page-caption {
-        font-size: 2em;
-    }
-
-    .page-subcaption {
-        margin: 0;
-        padding: 0;
-    }
-</style>
