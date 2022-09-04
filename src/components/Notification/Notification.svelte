@@ -1,0 +1,19 @@
+<script>
+    export let message;
+</script>
+
+<div class="notification">
+    {message}
+</div>
+
+<style>
+    .notification {
+        padding: 10px 12px;
+        color: #000;
+        font-weight: bold;
+        background-color: #ec2e67;
+        margin-bottom: 12px;
+        border-radius: 10px;
+        z-index: 300;
+    }
+</style>
