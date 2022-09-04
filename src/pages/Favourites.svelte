@@ -4,7 +4,7 @@
     import FavouritesItem from "../components/Favourites/FavouritesItem.svelte";
     import Popup from "../components/Shared/Popup.svelte";
     import { favourites } from "../favourite-store";
-    import { pushNotification } from '../notification-store'
+    import { pushNotification } from "../notification-store";
 
     let favouriteList = [];
     let currentRemoveFeed = null;
@@ -27,6 +27,8 @@
     }
 
     function removeFeedFromFavouriteHandler() {
+        pushNotification("Photo removed from favorites.");
+
         favourites.update((favList) => {
             const updatedFavList = favList.filter(
                 (feedItem) => feedItem.id !== currentRemoveFeed
@@ -53,7 +55,6 @@
     {#if favouriteList.length === 0}
         <p class="page-subcaption">No favourite added.</p>
     {/if}
-    <button on:click={() => pushNotification("Hello!")}>Click me</button>
 </header>
 
 <FavouritesGrid>

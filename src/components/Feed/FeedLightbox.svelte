@@ -2,10 +2,10 @@
     import { createEventDispatcher } from "svelte";
     import { useLazyImage as lazyImage } from "svelte-lazy-image";
 
-    import { favourites } from "../../favourite-store";
-
     import Backdrop from "../Shared/Backdrop.svelte";
     import Button from "../Shared/Button.svelte";
+    import { favourites } from "../../favourite-store";
+    import { pushNotification } from "../../notification-store";
 
     export let show = false;
     export let hideFavouriteButton = false;
@@ -18,6 +18,8 @@
     }
 
     function addToFavouriteHandler() {
+        pushNotification("Photo added to favourites");
+
         favourites.update((favouriteList) => {
             const updatedFavouriteList = [...favouriteList];
 

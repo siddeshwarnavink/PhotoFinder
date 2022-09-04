@@ -37,5 +37,6 @@
 		bottom: 24px;
 		right: 24px;
 		width: 300px;
+		z-index: 300;
 	}
 </style>
