@@ -1,4 +1,5 @@
 <script>
+	import { onMount } from "svelte";
 	import { Router, Route } from "svelte-routing";
 
 	import Navigation from "./components/Navigation/Navigation.svelte";
@@ -6,10 +7,15 @@
 	import Favourites from "./pages/Favourites.svelte";
 	import Feed from "./pages/Feed.svelte";
 	import { notifications } from "./notification-store";
+	import { fetchPastFavourites } from "./favourite-store";
 
 	export let url = "";
 
 	let notificationList = [];
+
+	onMount(() => {
+		fetchPastFavourites();
+	});
 
 	notifications.subscribe((notifications) => {
 		notificationList = [...notifications];
