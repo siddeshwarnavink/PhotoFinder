@@ -76,4 +76,10 @@
         align-items: center;
         padding: 10px 0;
     }
+
+    @media (max-width: 600px) {
+        .favourite-item {
+            margin-bottom: 12px;
+        }
+    }
 </style>

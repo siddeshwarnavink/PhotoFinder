@@ -18,4 +18,14 @@
         column-gap: 24px;
         row-gap: 24px;
     }
+
+    @media (max-width: 600px) {
+        .wrapper {
+            margin: 0 12px;
+        }
+
+        .wrapper .favourites-grid {
+            display: block;
+        }
+    }
 </style>

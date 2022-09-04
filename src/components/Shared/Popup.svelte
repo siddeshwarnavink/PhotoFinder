@@ -52,4 +52,11 @@
     .popup button:hover {
         background-color: #df265d;
     }
+
+    @media (max-width: 600px) {
+        .popup {
+            left: 5%;
+            width: 90vw;
+        }
+    }
 </style>
