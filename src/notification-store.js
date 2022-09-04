@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
 
-export const notifications = writable([{message: "He"}]);
+export const notifications = writable([]);
 
 export const pushNotification = (message) => {
     let newNotificationIndex;

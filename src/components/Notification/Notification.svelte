@@ -16,4 +16,11 @@
         border-radius: 10px;
         z-index: 300;
     }
+
+    @media (max-width: 600px) {
+        .notification {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
 </style>

@@ -43,4 +43,12 @@
 		width: 300px;
 		z-index: 300;
 	}
+
+	@media (max-width: 600px) {
+		.notification-tray {
+			bottom: 0;
+			left: 0;
+			width: 100%;
+		}
+	}
 </style>
