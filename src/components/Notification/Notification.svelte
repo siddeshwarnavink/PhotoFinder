@@ -21,6 +21,7 @@
         .notification {
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
+            margin-bottom: 0;
         }
     }
 </style>
