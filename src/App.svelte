@@ -6,6 +6,7 @@
 	import Notification from "./components/Notification/Notification.svelte";
 	import Favourites from "./pages/Favourites.svelte";
 	import Feed from "./pages/Feed.svelte";
+	import Settings from "./pages/Settings.svelte";
 	import { notifications } from "./notification-store";
 	import { fetchPastFavourites } from "./favourite-store";
 
@@ -27,6 +28,7 @@
 
 	<Route path="/" component={Feed} />
 	<Route path="/favourites" component={Favourites} />
+	<Route path="/settings" component={Settings} />
 </Router>
 
 <div class="notification-tray">

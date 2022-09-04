@@ -15,11 +15,22 @@
     <NavigationLink to="/favourites"
         >Favourites {#if favouritesCount > 0}({favouritesCount}){/if}</NavigationLink
     >
+
+    <div class="side-nav">
+        <NavigationLink to="/settings">
+            <span class="material-icons">settings</span>
+        </NavigationLink>
+    </div>
 </div>
 
 <style>
     .nav {
         text-align: center;
         padding: 1em 0;
+        margin-left: 50px;
+    }
+
+    .nav .side-nav {
+        float: right;
     }
 </style>
