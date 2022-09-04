@@ -17,4 +17,14 @@
         background-position: center center;
         background-repeat: no-repeat;
     }
+
+    @media (max-width: 600px) {
+        .wrapper {
+            margin: 0 12px;
+        }
+
+        .wrapper .feed-grid {
+            display: block;
+        }
+    }
 </style>

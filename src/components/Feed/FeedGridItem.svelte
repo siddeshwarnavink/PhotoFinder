@@ -55,4 +55,14 @@
         -ms-transform: translate(-50%, -50%);
         text-align: center;
     }
+
+    @media (max-width: 600px) {
+        .container {
+            margin-bottom: 12px;
+        }
+
+        .feed-photo {
+            width: 100%;
+        }
+    }
 </style>
