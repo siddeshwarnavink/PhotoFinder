@@ -11,8 +11,7 @@
 </script>
 
 <div class="nav">
-    <NavigationLink to="/">Greetings</NavigationLink>
-    <NavigationLink to="/feed">Gallery feed</NavigationLink>
+    <NavigationLink to="/">Gallery feed</NavigationLink>
     <NavigationLink to="/favourites">Favourites ({favouritesCount})</NavigationLink>
 </div>
 

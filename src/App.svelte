@@ -5,7 +5,6 @@
 	import Notification from "./components/Notification/Notification.svelte";
 	import Favourites from "./pages/Favourites.svelte";
 	import Feed from "./pages/Feed.svelte";
-	import Greetings from "./pages/Greetings.svelte";
 	import { notifications } from "./notification-store";
 
 	export let url = "";
@@ -20,8 +19,7 @@
 <Router {url}>
 	<Navigation />
 
-	<Route path="/" component={Greetings} />
-	<Route path="/feed" component={Feed} />
+	<Route path="/" component={Feed} />
 	<Route path="/favourites" component={Favourites} />
 </Router>
 
