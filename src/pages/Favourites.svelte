@@ -6,17 +6,33 @@
     import PageJumbotron from "../components/Shared/PageJumbotron.svelte";
     import { favourites, removeFavourite } from "../favourite-store";
     import { pushNotification } from "../notification-store";
+    import { settings } from "../settings-store";
 
     let favouriteList = [];
     let currentRemoveFeed = null;
     let selectedFeed = {};
+    let shouldShowPopupWhenRemoveFavourite = true;
 
     favourites.subscribe((favList) => {
         favouriteList = [...favList];
     });
 
+    settings.subscribe((settingsList) => {
+        const showPopupSetting = settingsList.find(
+            (setting) => setting.id === "show-popup-unfavourite"
+        );
+
+        if (showPopupSetting) {
+            shouldShowPopupWhenRemoveFavourite = showPopupSetting.value;
+        }
+    });
+
     function showRemoveFromFavouritePopupHandler(feedId) {
         currentRemoveFeed = feedId;
+
+        if (!shouldShowPopupWhenRemoveFavourite) {
+            removeFeedFromFavouriteHandler();
+        }
     }
 
     function viewFeedHandler(feedData) {
