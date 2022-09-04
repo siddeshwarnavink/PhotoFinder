@@ -4,7 +4,7 @@
 
     import Backdrop from "../Shared/Backdrop.svelte";
     import Button from "../Shared/Button.svelte";
-    import { favourites } from "../../favourite-store";
+    import { addFavourite } from "../../favourite-store";
     import { pushNotification } from "../../notification-store";
 
     export let show = false;
@@ -19,20 +19,7 @@
 
     function addToFavouriteHandler() {
         pushNotification("Photo added to favourites");
-
-        favourites.update((favouriteList) => {
-            const updatedFavouriteList = [...favouriteList];
-
-            if (
-                !updatedFavouriteList.find(
-                    (feed) => feed.id === selectedFeed.id
-                )
-            ) {
-                updatedFavouriteList.push(selectedFeed);
-            }
-
-            return updatedFavouriteList;
-        });
+        addFavourite(selectedFeed);
     }
 </script>
 

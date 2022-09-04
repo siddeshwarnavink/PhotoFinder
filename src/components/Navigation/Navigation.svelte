@@ -12,7 +12,9 @@
 
 <div class="nav">
     <NavigationLink to="/">Gallery feed</NavigationLink>
-    <NavigationLink to="/favourites">Favourites ({favouritesCount})</NavigationLink>
+    <NavigationLink to="/favourites"
+        >Favourites {#if favouritesCount > 0}({favouritesCount}){/if}</NavigationLink
+    >
 </div>
 
 <style>

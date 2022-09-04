@@ -4,7 +4,7 @@
     import FavouritesItem from "../components/Favourites/FavouritesItem.svelte";
     import Popup from "../components/Shared/Popup.svelte";
     import PageJumbotron from "../components/Shared/PageJumbotron.svelte";
-    import { favourites } from "../favourite-store";
+    import { favourites, removeFavourite } from "../favourite-store";
     import { pushNotification } from "../notification-store";
 
     let favouriteList = [];
@@ -30,12 +30,7 @@
     function removeFeedFromFavouriteHandler() {
         pushNotification("Photo removed from favorites.");
 
-        favourites.update((favList) => {
-            const updatedFavList = favList.filter(
-                (feedItem) => feedItem.id !== currentRemoveFeed
-            );
-            return updatedFavList;
-        });
+        removeFavourite(currentRemoveFeed);
         currentRemoveFeed = null;
     }
 </script>
