@@ -10,6 +10,7 @@
 	import { notifications } from "./notification-store";
 	import { fetchPastFavourites } from "./favourite-store";
 	import { fetchPastSettings } from "./settings-store";
+	import BottomNavigation from "./components/Navigation/BottomNavigation.svelte";
 
 	export let url = "";
 
@@ -31,6 +32,8 @@
 	<Route path="/" component={Feed} />
 	<Route path="/favourites" component={Favourites} />
 	<Route path="/settings" component={Settings} />
+
+	<BottomNavigation />
 </Router>
 
 <div class="notification-tray">

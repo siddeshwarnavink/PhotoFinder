@@ -33,4 +33,10 @@
     .nav .side-nav {
         float: right;
     }
+
+    @media (max-width: 600px) {
+        .nav {
+            display: none;
+        }
+    }
 </style>
