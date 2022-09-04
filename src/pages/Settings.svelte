@@ -12,7 +12,7 @@
         <SettingItem
             label={settingItem.label}
             settingCode={settingItem.id}
-            defaultValue={settingItem.defaultValue}
+            value={settingItem.value}
         />
     {/each}
 </SettingsWrapper>

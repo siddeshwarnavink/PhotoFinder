@@ -9,6 +9,7 @@
 	import Settings from "./pages/Settings.svelte";
 	import { notifications } from "./notification-store";
 	import { fetchPastFavourites } from "./favourite-store";
+	import { fetchPastSettings } from "./settings-store";
 
 	export let url = "";
 
@@ -16,6 +17,7 @@
 
 	onMount(() => {
 		fetchPastFavourites();
+		fetchPastSettings();
 	});
 
 	notifications.subscribe((notifications) => {

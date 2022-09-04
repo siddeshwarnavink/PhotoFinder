@@ -1,5 +1,9 @@
+<script>
+    export let checked = false;
+</script>
+
 <label class="switch">
-    <input type="checkbox" checked />
+    <input type="checkbox" {checked} />
     <span class="slider round" />
 </label>
 
