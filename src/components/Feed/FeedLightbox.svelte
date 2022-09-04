@@ -56,6 +56,15 @@
 
     .feed-action {
         bottom: 12%;
-        left: 44%;
+        width: 100%;
+        text-align: center;
+    }
+
+    @media (max-width: 600px) {
+        img {
+            top: 25%;
+            width: 100%;
+            padding: 24px;
+        }
     }
 </style>
