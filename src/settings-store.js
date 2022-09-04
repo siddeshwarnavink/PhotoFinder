@@ -27,9 +27,7 @@ export const updateSetting = (id, newValue) => {
             return settingItem;
         });
 
-
         localStorage.settings = JSON.stringify(updatedSettingsList);
-
         return updatedSettingsList;
     });
 }

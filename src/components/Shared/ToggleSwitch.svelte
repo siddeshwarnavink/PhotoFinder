@@ -1,9 +1,17 @@
 <script>
+    import { createEventDispatcher } from "svelte";
+
     export let checked = false;
+
+    const dispatch = createEventDispatcher();
+
+    function onChangeHandler(event) {
+        dispatch("change", { checked: event.target.checked });
+    }
 </script>
 
 <label class="switch">
-    <input type="checkbox" {checked} />
+    <input type="checkbox" on:change={onChangeHandler} {checked} />
     <span class="slider round" />
 </label>
 

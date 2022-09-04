@@ -1,8 +1,14 @@
 <script>
     import ToggleSwitch from "../Shared/ToggleSwitch.svelte";
+    import { updateSetting } from "../../settings-store";
 
+    export let settingCode;
     export let label;
     export let value;
+
+    function settingOnChangeHandler(event) {
+        updateSetting(settingCode, event.detail.checked);
+    }
 </script>
 
 <div class="setting-item">
@@ -10,7 +16,7 @@
 
     <div style="flex: 1;" />
 
-    <ToggleSwitch checked={value} />
+    <ToggleSwitch checked={value} on:change={settingOnChangeHandler} />
 </div>
 
 <style>
