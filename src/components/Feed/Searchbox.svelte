@@ -6,6 +6,7 @@
     let isDarkMode = false;
 
     export let query;
+    export let mobile = false;
 
     const dispatch = createEventDispatcher();
 
@@ -20,9 +21,13 @@
     function onInputChangeHandler(event) {
         dispatch("change", { value: event.target.value });
     }
+
+    function onCloseSearchHanlder() {
+        dispatch("close");
+    }
 </script>
 
-<div class="search-box" class:darkMode={isDarkMode}>
+<div class="search-box" class:darkMode={isDarkMode} class:mobile>
     <div class="search-box__input">
         <span class="material-icons">search</span>
         <input
@@ -30,15 +35,22 @@
             value={query}
             on:keyup={onInputChangeHandler}
         />
+        {#if mobile}
+            <span on:click={onCloseSearchHanlder} class="material-icons">close</span>
+        {/if}
     </div>
 </div>
 
 <style>
     .search-box {
         display: flex;
-        max-width: 400px;
-        margin: auto;
+        width: 300px;
         padding: 12px 0;
+    }
+
+    .search-box.mobile {
+        width: 100% !important;
+        padding: 0;
     }
 
     .search-box .search-box__input {
@@ -47,6 +59,12 @@
         padding: 6px 12px;
         display: flex;
         border-radius: 10px;
+        width: 100%;
+    }
+
+    .search-box.mobile .search-box__input {
+        border-radius: 0px !important;
+        padding: 16px 12px;
     }
 
     .search-box.darkMode .search-box__input {
