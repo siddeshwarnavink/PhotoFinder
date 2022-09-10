@@ -1,8 +1,6 @@
 <script>
     import { createEventDispatcher } from "svelte";
 
-    import Button from "../Shared/Button.svelte";
-
     export let query;
 
     const dispatch = createEventDispatcher();
@@ -16,14 +14,10 @@
     <div class="search-box__input">
         <span class="material-icons">search</span>
         <input
-            placeholder="e.g nature"
+            placeholder="Search for pictures"
             value={query}
             on:keyup={onInputChangeHandler}
         />
-    </div>
-
-    <div class="search-box__searchBtn">
-        <Button>Search</Button>
     </div>
 </div>
 
@@ -35,16 +29,11 @@
         padding: 12px 0;
     }
 
-    .search-box .search-box__searchBtn {
-        margin-left: 12px;
-    }
-
     .search-box .search-box__input {
-        background-color: #fff;
+        background-color: #ccc;
         color: #000;
         padding: 6px 12px;
         display: flex;
-        border: 1px solid #ccc;
         border-radius: 10px;
     }
 
@@ -53,6 +42,7 @@
         display: block;
         justify-content: center;
         align-items: center;
+        background-color: transparent;
     }
 
     .search-box__input input {

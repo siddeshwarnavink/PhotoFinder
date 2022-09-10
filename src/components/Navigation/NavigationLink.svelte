@@ -38,10 +38,10 @@
         text-decoration: none;
         padding: 12px 16px;
         outline: none;
+        font-size: 1.2em;
     }
 
     :global(a.active) .nav-link {
-        color: #ec2e67;
         font-weight: bold;
     }
 
