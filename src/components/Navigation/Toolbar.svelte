@@ -4,7 +4,9 @@
     import Searchbox from "../Feed/Searchbox.svelte";
     import Navigation from "./Navigation.svelte";
     import { searchQuery } from "../../searchQuery-store";
+    import { settings } from "../../settings-store";
 
+    let isDarkMode = false;
     let searchQueryText = "";
 
     export let showSearch;
@@ -13,6 +15,14 @@
         searchQuery.subscribe(({ query }) => {
             searchQueryText = query;
         });
+    });
+
+    settings.subscribe((settingsList) => {
+        const darkModeSetting = settingsList.find(
+            (setting) => setting.id === "dark-mode"
+        );
+
+        isDarkMode = darkModeSetting.value;
     });
 
     function onSearchQueryChangeHandler(event) {
@@ -34,7 +44,7 @@
     }
 </script>
 
-<div class="toolbar">
+<div class="toolbar" class:darkMode={isDarkMode}>
     <img src="/images/Gallery-Icon.svg" alt="Gallery-Logo" class="logo" />
 
     <div class="navigation">
@@ -60,6 +70,10 @@
     .toolbar {
         background-color: white;
         display: flex;
+    }
+
+    .toolbar.darkMode {
+        background-color: #1a1a1a;
     }
 
     .toolbar .logo {

@@ -1,16 +1,28 @@
 <script>
     import { createEventDispatcher } from "svelte";
 
+    import { settings } from "../../settings-store";
+
+    let isDarkMode = false;
+
     export let query;
 
     const dispatch = createEventDispatcher();
+
+    settings.subscribe((settingsList) => {
+        const darkModeSetting = settingsList.find(
+            (setting) => setting.id === "dark-mode"
+        );
+
+        isDarkMode = darkModeSetting.value;
+    });
 
     function onInputChangeHandler(event) {
         dispatch("change", { value: event.target.value });
     }
 </script>
 
-<div class="search-box">
+<div class="search-box" class:darkMode={isDarkMode}>
     <div class="search-box__input">
         <span class="material-icons">search</span>
         <input
@@ -37,6 +49,11 @@
         border-radius: 10px;
     }
 
+    .search-box.darkMode .search-box__input {
+        background-color: #000 !important;
+        color: #fff !important;
+    }
+
     .search-box__input input,
     .search-box__input .material-icons {
         display: block;
@@ -50,6 +67,7 @@
         outline: none;
         font-size: 1.2em;
         width: 100%;
+        color: inherit;
     }
 
     .search-box__input .material-icons {
