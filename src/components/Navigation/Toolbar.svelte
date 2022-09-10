@@ -77,7 +77,7 @@
     }
 
     .toolbar .logo {
-        padding: 10px;
+        padding: 15px;
         margin: 0 12px;
     }
 

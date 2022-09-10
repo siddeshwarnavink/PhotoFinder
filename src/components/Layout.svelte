@@ -1,4 +1,5 @@
 <script>
+    import BottomNavigation from "./Navigation/BottomNavigation.svelte";
     import Toolbar from "./Navigation/Toolbar.svelte";
 
     export let showSearch = false;
@@ -9,3 +10,5 @@
 <div class="container">
     <slot />
 </div>
+
+<BottomNavigation />
