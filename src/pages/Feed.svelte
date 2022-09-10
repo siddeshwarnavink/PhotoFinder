@@ -30,6 +30,13 @@
 
         if (query.trim() === "") {
             url = "https://api.pexels.com/v1/search?query=Nature";
+        } else {
+            searchQuery.update((prevSearchQuery) => {
+                return {
+                    ...prevSearchQuery,
+                    submitted: false,
+                };
+            });
         }
 
         fetch(url, {

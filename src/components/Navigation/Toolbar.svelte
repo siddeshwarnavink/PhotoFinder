@@ -14,9 +14,9 @@
 
     onMount(() => {
         searchQuery.subscribe(({ query }) => {
-            if (query.trim() !== "" && showSearch) {
-                searchMode = true;
-            }
+            // if (query.trim() !== "" && showSearch) {
+            //     searchMode = true;
+            // }
             searchQueryText = query;
         });
     });
@@ -60,36 +60,36 @@
     }
 </script>
 
-{#if !searchMode}
-    <div class="toolbar" class:darkMode={isDarkMode}>
-        <img src="/images/Gallery-Icon.svg" alt="Gallery-Logo" class="logo" />
+<div class="toolbar" class:darkMode={isDarkMode} class:searchMode={searchMode}>
+    <img src="/images/Gallery-Icon.svg" alt="Gallery-Logo" class="logo" />
 
-        <div class="navigation">
-            <Navigation />
-        </div>
-
-        {#if showSearch}
-            <div style="flex:1;" />
-
-            <form
-                class="search-box"
-                on:submit|preventDefault={onSearchSubmitHandler}
-            >
-                <Searchbox
-                    query={searchQueryText}
-                    on:change={onSearchQueryChangeHandler}
-                    on:close={toggleSearchModeHandler}
-                />
-            </form>
-
-            <div class="search-icon">
-                <button on:click={toggleSearchModeHandler}>
-                    <span class="material-icons">search</span>
-                </button>
-            </div>
-        {/if}
+    <div class="navigation">
+        <Navigation />
     </div>
-{:else}
+
+    {#if showSearch}
+        <div style="flex:1;" />
+
+        <form
+            class="search-box"
+            on:submit|preventDefault={onSearchSubmitHandler}
+        >
+            <Searchbox
+                query={searchQueryText}
+                on:change={onSearchQueryChangeHandler}
+                on:close={toggleSearchModeHandler}
+            />
+        </form>
+
+        <div class="search-icon">
+            <button on:click={toggleSearchModeHandler}>
+                <span class="material-icons">search</span>
+            </button>
+        </div>
+    {/if}
+</div>
+
+{#if searchMode}
     <form
         on:submit|preventDefault={onSearchSubmitHandler}
         class="mobileSearch-toolbar"
@@ -140,12 +140,18 @@
         color: #fff !important;
     }
 
+    .mobileSearch-toolbar {
+        display: none;
+    }
+
     @media (max-width: 600px) {
         .toolbar .navigation,
-        .toolbar .search-box {
+        .toolbar .search-box,
+        .toolbar.searchMode {
             display: none;
         }
 
+        .mobileSearch-toolbar,
         .toolbar .search-icon button {
             display: block;
         }
