@@ -2,13 +2,10 @@
 	import { onMount } from "svelte";
 	import { Router, Route } from "svelte-routing";
 
-	import Navigation from "./components/Navigation/Navigation.svelte";
 	import Notification from "./components/Notification/Notification.svelte";
 	import Favourites from "./pages/Favourites.svelte";
 	import Feed from "./pages/Feed.svelte";
 	import Settings from "./pages/Settings.svelte";
-	import BottomNavigation from "./components/Navigation/BottomNavigation.svelte";
-	import Layout from "./components/Layout.svelte";
 	import { notifications } from "./notification-store";
 	import { fetchPastFavourites } from "./favourite-store";
 	import { settings, fetchPastSettings } from "./settings-store";
@@ -42,11 +39,9 @@
 </script>
 
 <Router {url}>
-	<Layout>
-		<Route path="/" component={Feed} />
-		<Route path="/favourites" component={Favourites} />
-		<Route path="/settings" component={Settings} />
-	</Layout>
+	<Route path="/" component={Feed} />
+	<Route path="/favourites" component={Favourites} />
+	<Route path="/settings" component={Settings} />
 </Router>
 
 <div class="notification-tray">

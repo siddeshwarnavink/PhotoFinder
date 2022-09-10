@@ -7,6 +7,7 @@
     import { favourites, removeFavourite } from "../favourite-store";
     import { pushNotification } from "../notification-store";
     import { settings } from "../settings-store";
+    import Layout from "../components/Layout.svelte";
 
     let favouriteList = [];
     let currentRemoveFeed = null;
@@ -55,28 +56,35 @@
     }
 </script>
 
-<Popup show={currentRemoveFeed} on:toggle={closeRemoveFeedPopupHandler} on:confirm={removeFeedFromFavouriteHandler}>
-    <p>Are you sure to remove from favourite?</p>
-</Popup>
+<Layout>
+    <Popup
+        show={currentRemoveFeed}
+        on:toggle={closeRemoveFeedPopupHandler}
+        on:confirm={removeFeedFromFavouriteHandler}
+    >
+        <p>Are you sure to remove from favourite?</p>
+    </Popup>
 
-<FeedLightbox
-    show={Object.keys(selectedFeed).length > 0}
-    hideFavouriteButton={true}
-    {selectedFeed}
-    on:close={closeSelectedFeedHandler}
-/>
+    <FeedLightbox
+        show={Object.keys(selectedFeed).length > 0}
+        hideFavouriteButton={true}
+        {selectedFeed}
+        on:close={closeSelectedFeedHandler}
+    />
 
-<PageJumbotron
-    caption="Favourites"
-    subcaption={favouriteList.length === 0 ? "No favourite added." : ""}
-/>
+    <PageJumbotron
+        caption="Favourites"
+        subcaption={favouriteList.length === 0 ? "No favourite added." : ""}
+    />
 
-<FavouritesGrid>
-    {#each favouriteList as feedData}
-        <FavouritesItem
-            {feedData}
-            on:remove={() => showRemoveFromFavouritePopupHandler(feedData.id)}
-            on:viewFeed={() => viewFeedHandler(feedData)}
-        />
-    {/each}
-</FavouritesGrid>
+    <FavouritesGrid>
+        {#each favouriteList as feedData}
+            <FavouritesItem
+                {feedData}
+                on:remove={() =>
+                    showRemoveFromFavouritePopupHandler(feedData.id)}
+                on:viewFeed={() => viewFeedHandler(feedData)}
+            />
+        {/each}
+    </FavouritesGrid>
+</Layout>

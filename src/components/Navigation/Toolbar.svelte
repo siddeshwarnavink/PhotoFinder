@@ -1,15 +1,36 @@
 <script>
+    import { onMount } from "svelte";
+
     import Searchbox from "../Feed/Searchbox.svelte";
     import Navigation from "./Navigation.svelte";
+    import { searchQuery } from "../../searchQuery-store";
 
-    let searchQuery = "";
+    let searchQueryText = "";
+
+    export let showSearch;
+
+    onMount(() => {
+        searchQuery.subscribe(({ query }) => {
+            searchQueryText = query;
+        });
+    });
 
     function onSearchQueryChangeHandler(event) {
-        searchQuery = event.detail.value;
+        searchQuery.update((prevSearchQuery) => {
+            return {
+                ...prevSearchQuery,
+                query: event.detail.value,
+            };
+        });
     }
 
     function onSearchSubmitHandler() {
-        // ...
+        searchQuery.update((prevSearchQuery) => {
+            return {
+                ...prevSearchQuery,
+                submitted: true,
+            };
+        });
     }
 </script>
 
@@ -20,11 +41,19 @@
         <Navigation />
     </div>
 
-    <div style="flex:1;" />
+    {#if showSearch}
+        <div style="flex:1;" />
 
-    <form class="search-box" on:submit|preventDefault={onSearchSubmitHandler}>
-        <Searchbox query={searchQuery} on:change={onSearchQueryChangeHandler} />
-    </form>
+        <form
+            class="search-box"
+            on:submit|preventDefault={onSearchSubmitHandler}
+        >
+            <Searchbox
+                query={searchQueryText}
+                on:change={onSearchQueryChangeHandler}
+            />
+        </form>
+    {/if}
 </div>
 
 <style>

@@ -1,9 +1,10 @@
 <script>
-import Toolbar from "./Navigation/Toolbar.svelte";
+    import Toolbar from "./Navigation/Toolbar.svelte";
 
+    export let showSearch = false;
 </script>
 
-<Toolbar />
+<Toolbar {showSearch} />
 
 <div class="container">
     <slot />
