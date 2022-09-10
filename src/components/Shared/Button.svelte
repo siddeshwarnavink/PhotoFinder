@@ -17,7 +17,7 @@
         padding: 8px 25px;
         font-weight: bold;
         font-size: 1.2rem;
-        background-color: #ec2e67;
+        background-color: #EC8147;
         color: #fff;
         border: none;
         border-radius: 12px;
@@ -26,6 +26,6 @@
     }
 
     button:hover {
-        background-color: #df265d;
+        background-color: #e6773b;
     }
 </style>
