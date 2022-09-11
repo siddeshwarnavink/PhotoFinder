@@ -12,3 +12,9 @@
 </div>
 
 <BottomNavigation />
+
+<style>
+    .container {
+        padding-top: 60px;
+    }
+</style>

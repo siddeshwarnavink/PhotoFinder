@@ -8,6 +8,7 @@
 
     let isDarkMode = false;
     let searchMode = false;
+    let pinned = true;
     let searchQueryText = "";
 
     export let showSearch;
@@ -19,6 +20,8 @@
             // }
             searchQueryText = query;
         });
+
+        toolbarPinnedStateListener();
     });
 
     settings.subscribe((settingsList) => {
@@ -28,6 +31,22 @@
 
         isDarkMode = darkModeSetting.value;
     });
+
+    function toolbarPinnedStateListener() {
+        const toolbarHeight = 60;
+        let pxTrigger = 0;
+
+        document.addEventListener("scroll", () => {
+            const pxFromTop = window.scrollY || window.pageYOffset;
+
+            if (pxFromTop > toolbarHeight) {
+                pinned = pxTrigger > pxFromTop;
+                pxTrigger = pxFromTop
+            } else {
+                pinned = true;
+            }
+        });
+    }
 
     function onSearchQueryChangeHandler(event) {
         searchQuery.update((prevSearchQuery) => {
@@ -60,7 +79,7 @@
     }
 </script>
 
-<div class="toolbar" class:darkMode={isDarkMode} class:searchMode={searchMode}>
+<div class="toolbar" class:darkMode={isDarkMode} class:searchMode class:pinned>
     <img src="/images/Gallery-Icon.svg" alt="Gallery-Logo" class="logo" />
 
     <div class="navigation">
@@ -93,6 +112,7 @@
     <form
         on:submit|preventDefault={onSearchSubmitHandler}
         class="mobileSearch-toolbar"
+        class:pinned
     >
         <Searchbox
             mobile={true}
@@ -107,6 +127,21 @@
     .toolbar {
         background-color: white;
         display: flex;
+    }
+
+    .toolbar,
+    .mobileSearch-toolbar {
+        position: fixed;
+        width: 100%;
+        z-index: 100;
+        height: 60px;
+        top: -60px;
+        transition: all 200ms ease;
+    }
+
+    .toolbar.pinned,
+    .mobileSearch-toolbar.pinned {
+        top: 0;
     }
 
     .toolbar.darkMode {
