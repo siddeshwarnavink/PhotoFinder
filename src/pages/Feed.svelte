@@ -14,6 +14,7 @@
     let lazyLoading = false;
     let photoFeed = [];
     let selectedFeed = {};
+    let feedSearchQuery = "";
     let currentPage = 1;
     let maxPages = 2;
 
@@ -22,6 +23,7 @@
 
         searchQuery.subscribe((searchQuery) => {
             if (searchQuery.submitted) {
+                feedSearchQuery = searchQuery.query;
                 fetchFeedHandler(searchQuery.query);
             }
         });
@@ -76,9 +78,9 @@
     }
 
     function lazyLoadHandler() {
-        if (currentPage + 1 <= maxPages) {
+        if (currentPage + 1 <= maxPages && !lazyLoading) {
             currentPage += 1;
-            fetchFeedHandler();
+            fetchFeedHandler(feedSearchQuery);
         }
     }
 
