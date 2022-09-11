@@ -34,7 +34,7 @@
         background-color: #1a1a1a;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 905px) {
         .bottom-navigation {
             display: flex;
         }

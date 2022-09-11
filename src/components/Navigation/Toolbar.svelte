@@ -179,7 +179,7 @@
         display: none;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 905px) {
         .toolbar .navigation,
         .toolbar .search-box,
         .toolbar.searchMode {
