@@ -7,11 +7,15 @@
     import FeedLightbox from "../components/Feed/FeedLightbox.svelte";
     import PageJumbotron from "../components/Shared/PageJumbotron.svelte";
     import Layout from "../components/Layout.svelte";
+    import VisibilityDetect from "../components/Hidden/VisibilityDetect.svelte";
     import { searchQuery } from "../searchQuery-store";
 
-    let isLoading = false;
+    let initialLoading = false;
+    let lazyLoading = false;
     let photoFeed = [];
     let selectedFeed = {};
+    let currentPage = 1;
+    let maxPages = 2;
 
     onMount(() => {
         fetchFeedHandler();
@@ -23,13 +27,22 @@
         });
     });
 
-    function fetchFeedHandler(query = "") {
-        isLoading = true;
+    function syncPagesState(jsonData) {
+        currentPage = jsonData.page;
+        maxPages = Math.floor(jsonData.total_results / jsonData.per_page);
+    }
 
-        let url = "https://api.pexels.com/v1/search?query=" + query;
+    function fetchFeedHandler(query = "") {
+        if (currentPage > 1) {
+            lazyLoading = true;
+        } else {
+            initialLoading = true;
+        }
+
+        let url = `https://api.pexels.com/v1/search?per_page=12&query=${query}&page=${currentPage}`;
 
         if (query.trim() === "") {
-            url = "https://api.pexels.com/v1/search?query=Nature";
+            url = `https://api.pexels.com/v1/search?per_page=12&query=Nature&page=${currentPage}`;
         } else {
             searchQuery.update((prevSearchQuery) => {
                 return {
@@ -47,9 +60,26 @@
         })
             .then((response) => response.json())
             .then((json) => {
-                isLoading = false;
-                photoFeed = json.photos;
+                if (currentPage > 1) {
+                    lazyLoading = false;
+                } else {
+                    initialLoading = false;
+                }
+
+                if (currentPage > 1) {
+                    photoFeed = photoFeed.concat(json.photos);
+                } else {
+                    photoFeed = json.photos;
+                }
+                syncPagesState(json);
             });
+    }
+
+    function lazyLoadHandler() {
+        if (currentPage + 1 <= maxPages) {
+            currentPage += 1;
+            fetchFeedHandler();
+        }
     }
 
     function viewFeedHandler(feedData) {
@@ -74,7 +104,7 @@
     />
 
     <div class="wrapper">
-        {#if isLoading}
+        {#if initialLoading}
             <Spinner />
         {:else}
             <FeedGrid>
@@ -86,6 +116,11 @@
                     />
                 {/each}
             </FeedGrid>
+
+            {#if lazyLoading}
+                <Spinner />
+            {/if}
+            <VisibilityDetect on:visible={lazyLoadHandler} />
         {/if}
     </div>
 </Layout>
