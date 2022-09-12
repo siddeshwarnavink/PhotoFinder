@@ -23,6 +23,9 @@
 
         searchQuery.subscribe((searchQuery) => {
             if (searchQuery.submitted) {
+                document.documentElement.scrollTop = 0;
+                currentPage = 1;
+
                 feedSearchQuery = searchQuery.query;
                 fetchFeedHandler(searchQuery.query);
             }
@@ -74,6 +77,13 @@
                     photoFeed = json.photos;
                 }
                 syncPagesState(json);
+
+                searchQuery.update((prevSearchQuery) => {
+                    return {
+                        ...prevSearchQuery,
+                        submitted: false,
+                    };
+                });
             });
     }
 
@@ -94,10 +104,16 @@
 </script>
 
 <Layout showSearch={true}>
-    <PageJumbotron
-        caption="Gallery feed"
-        subcaption="Our collections of quality photos!"
-    />
+    {#if feedSearchQuery.trim() === ""}
+        <PageJumbotron
+            caption="Gallery feed"
+            subcaption="Our collections of quality photos!"
+        />
+    {:else}
+        <div class="search-caption">
+            <h1>Search results for "{feedSearchQuery.trim()}"</h1>
+        </div>
+    {/if}
 
     <FeedLightbox
         show={Object.keys(selectedFeed).length > 0}
@@ -126,3 +142,9 @@
         {/if}
     </div>
 </Layout>
+
+<style>
+    .search-caption {
+        padding: 10px 5em;
+    }
+</style>
