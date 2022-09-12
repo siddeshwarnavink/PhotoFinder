@@ -50,7 +50,7 @@
         left: 0;
         right: 0;
         margin: 5% auto;
-        width: 50%;
+        width: 30%;
         top: 0%;
     }
 
