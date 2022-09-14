@@ -1,5 +1,6 @@
 <script>
     import { onMount } from "svelte";
+    import { _ } from "svelte-i18n";
 
     import FeedLightbox from "../components/Feed/FeedLightbox.svelte";
     import FavouritesGrid from "../components/Favourites/FavouritesGrid.svelte";
@@ -56,7 +57,7 @@
     }
 
     function removeFeedFromFavouriteHandler() {
-        pushNotification("Photo removed from favorites.");
+        pushNotification($_("favouritesPage.messages.photoUnfavorite"));
 
         removeFavourite(currentRemoveFeed);
         currentRemoveFeed = null;
@@ -72,7 +73,7 @@
     on:toggle={closeRemoveFeedPopupHandler}
     on:confirm={removeFeedFromFavouriteHandler}
 >
-    <p>Are you sure to remove from favourite?</p>
+    <p>{$_("favouritesPage.messages.photoUnfavorite")}</p>
 </Popup>
 
 <FeedLightbox
@@ -83,7 +84,7 @@
 />
 
 <PageJumbotron
-    caption="Favourites"
+    caption={$_("favouritesPage.caption")}
     subcaption={favouriteList.length === 0 ? "No favourite added." : ""}
 />
 

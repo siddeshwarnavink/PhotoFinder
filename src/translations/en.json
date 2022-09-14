@@ -9,5 +9,15 @@
     },
     "homePage": {
         "subcaption": "Our collections of quality photos!"
+    },
+    "settingsPage": {
+        "caption": "Settings"
+    },
+    "favouritesPage": {
+        "caption": "Favourites",
+        "messages": {
+            "photoUnfavorite": "Photo removed from favorites.",
+            "photoUnfavoriteConfirm": "Are you sure to remove from favourite?"
+        }
     }
 }

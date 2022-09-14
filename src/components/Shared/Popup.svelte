@@ -4,6 +4,7 @@
 
     import Backdrop from "../Shared/Backdrop.svelte";
     import { settings } from "../../settings-store";
+    import Button from "./Button.svelte";
 
     export let show = false;
 
@@ -38,7 +39,7 @@
         out:fly={{ y: -200, duration: 600 }}
     >
         <slot />
-        <button on:click={confirmPopupHandler}>Yes</button>
+        <Button on:click={confirmPopupHandler}>Yes</Button>
     </div>
 {/if}
 
@@ -56,22 +57,6 @@
     .popup.darkMode {
         background-color: #333333 !important;
         color: white;
-    }
-
-    .popup button {
-        padding: 8px 25px;
-        font-weight: bold;
-        font-size: 1rem;
-        background-color: #ec2e67;
-        color: #fff;
-        border: none;
-        border-radius: 12px;
-        cursor: pointer;
-        outline: none;
-    }
-
-    .popup button:hover {
-        background-color: #df265d;
     }
 
     @media (max-width: 600px) {

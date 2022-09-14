@@ -1,5 +1,6 @@
 <script>
     import { onMount } from "svelte";
+    import { _ } from "svelte-i18n";
 
     import SettingItem from "../components/Settings/SettingItem.svelte";
     import SettingsWrapper from "../components/Settings/SettingsWrapper.svelte";
@@ -23,7 +24,7 @@
     });
 </script>
 
-<PageJumbotron caption="Settings" />
+<PageJumbotron caption={$_("settingsPage.caption")} />
 
 <SettingsWrapper>
     {#each settingsList as settingItem}
