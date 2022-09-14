@@ -1,4 +1,6 @@
 <script>
+    import { _ } from "svelte-i18n";
+
     import BottomNavigationLink from "./BottomNavigationLink.svelte";
     import { settings } from "../../settings-store";
 
@@ -14,9 +16,21 @@
 </script>
 
 <div class="bottom-navigation" class:darkMode={isDarkMode}>
-    <BottomNavigationLink to="/" icon="collections" label="Gallery" />
-    <BottomNavigationLink to="/favourites" icon="star" label="Favourites" />
-    <BottomNavigationLink to="/settings" icon="settings" label="Settings" />
+    <BottomNavigationLink
+        to="/"
+        icon="collections"
+        label={$_("app.navigation.home")}
+    />
+    <BottomNavigationLink
+        to="/favourites"
+        icon="star"
+        label={$_("app.navigation.favourites")}
+    />
+    <BottomNavigationLink
+        to="/settings"
+        icon="settings"
+        label={$_("app.navigation.settings")}
+    />
 </div>
 
 <style>

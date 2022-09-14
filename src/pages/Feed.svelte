@@ -1,5 +1,6 @@
 <script>
     import { onMount } from "svelte";
+    import { _ } from "svelte-i18n";
 
     import Spinner from "../components/Shared/Spinner.svelte";
     import FeedGrid from "../components/Feed/FeedGrid.svelte";
@@ -111,8 +112,8 @@
 
 {#if feedSearchQuery.trim() === ""}
     <PageJumbotron
-        caption="Gallery feed"
-        subcaption="Our collections of quality photos!"
+        caption={$_('app.title')}
+        subcaption={$_('homePage.subcaption')}
     />
 {:else}
     <div class="search-caption">

@@ -1,19 +1,17 @@
 <script>
+    import { _ } from "svelte-i18n";
+
     import NavigationLink from "./NavigationLink.svelte";
-
-    import { favourites } from "../../favourite-store";
-
-    let favouritesCount = 0;
-
-    favourites.subscribe((favouriteList) => {
-        favouritesCount = favouriteList.length;
-    });
 </script>
 
 <div class="nav">
-    <NavigationLink to="/">Home</NavigationLink>
-    <NavigationLink to="/favourites">Favourites</NavigationLink>
-    <NavigationLink to="/settings">Settings</NavigationLink>
+    <NavigationLink to="/">{$_("app.navigation.home")}</NavigationLink>
+    <NavigationLink to="/favourites"
+        >{$_("app.navigation.favourites")}</NavigationLink
+    >
+    <NavigationLink to="/settings"
+        >{$_("app.navigation.settings")}</NavigationLink
+    >
 </div>
 
 <style>

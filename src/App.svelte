@@ -1,6 +1,7 @@
 <script>
 	import { onMount } from "svelte";
 	import { Router, Route } from "svelte-routing";
+	import { addMessages, init, getLocaleFromNavigator } from "svelte-i18n";
 
 	import Notification from "./components/Notification/Notification.svelte";
 	import Favourites from "./pages/Favourites.svelte";
@@ -11,6 +12,7 @@
 	import { settings, fetchPastSettings } from "./settings-store";
 	import { searchQuery } from "./searchQuery-store";
 	import Layout from "./components/Layout.svelte";
+	import en from "./translations/en.json";
 
 	export let url = "";
 
@@ -20,6 +22,13 @@
 	onMount(() => {
 		fetchPastFavourites();
 		fetchPastSettings();
+	});
+
+	addMessages("en", en);
+
+	init({
+		fallbackLocale: "en",
+		initialLocale: getLocaleFromNavigator(),
 	});
 
 	notifications.subscribe((notifications) => {
