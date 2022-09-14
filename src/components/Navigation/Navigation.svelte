@@ -12,9 +12,7 @@
 
 <div class="nav">
     <NavigationLink to="/">Home</NavigationLink>
-    <NavigationLink to="/favourites"
-        >Favourites {#if favouritesCount > 0}({favouritesCount}){/if}</NavigationLink
-    >
+    <NavigationLink to="/favourites">Favourites</NavigationLink>
     <NavigationLink to="/settings">Settings</NavigationLink>
 </div>
 
