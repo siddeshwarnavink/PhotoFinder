@@ -9,10 +9,13 @@
 	import { notifications } from "./notification-store";
 	import { fetchPastFavourites } from "./favourite-store";
 	import { settings, fetchPastSettings } from "./settings-store";
+	import { searchQuery } from "./searchQuery-store";
+	import Layout from "./components/Layout.svelte";
 
 	export let url = "";
 
 	let notificationList = [];
+	let shouldShowSearch = false;
 
 	onMount(() => {
 		fetchPastFavourites();
@@ -36,12 +39,18 @@
 			document.body.style.color = "#000";
 		}
 	});
+
+	searchQuery.subscribe(({ showSearch }) => {
+		shouldShowSearch = showSearch;
+	});
 </script>
 
 <Router {url}>
-	<Route path="/" component={Feed} />
-	<Route path="/favourites" component={Favourites} />
-	<Route path="/settings" component={Settings} />
+	<Layout showSearch={shouldShowSearch}>
+		<Route path="/" component={Feed} />
+		<Route path="/favourites" component={Favourites} />
+		<Route path="/settings" component={Settings} />
+	</Layout>
 </Router>
 
 <div class="notification-tray">

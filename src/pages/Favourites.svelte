@@ -1,4 +1,6 @@
 <script>
+    import { onMount } from "svelte";
+
     import FeedLightbox from "../components/Feed/FeedLightbox.svelte";
     import FavouritesGrid from "../components/Favourites/FavouritesGrid.svelte";
     import FavouritesItem from "../components/Favourites/FavouritesItem.svelte";
@@ -7,12 +9,21 @@
     import { favourites, removeFavourite } from "../favourite-store";
     import { pushNotification } from "../notification-store";
     import { settings } from "../settings-store";
-    import Layout from "../components/Layout.svelte";
+    import { searchQuery } from "../searchQuery-store";
 
     let favouriteList = [];
     let currentRemoveFeed = null;
     let selectedFeed = {};
     let shouldShowPopupWhenRemoveFavourite = true;
+
+    onMount(() => {
+        searchQuery.update((prevSearchQuery) => {
+            return {
+                ...prevSearchQuery,
+                showSearch: false,
+            };
+        });
+    });
 
     favourites.subscribe((favList) => {
         favouriteList = [...favList];
@@ -56,35 +67,32 @@
     }
 </script>
 
-<Layout>
-    <Popup
-        show={currentRemoveFeed}
-        on:toggle={closeRemoveFeedPopupHandler}
-        on:confirm={removeFeedFromFavouriteHandler}
-    >
-        <p>Are you sure to remove from favourite?</p>
-    </Popup>
+<Popup
+    show={currentRemoveFeed}
+    on:toggle={closeRemoveFeedPopupHandler}
+    on:confirm={removeFeedFromFavouriteHandler}
+>
+    <p>Are you sure to remove from favourite?</p>
+</Popup>
 
-    <FeedLightbox
-        show={Object.keys(selectedFeed).length > 0}
-        hideFavouriteButton={true}
-        {selectedFeed}
-        on:close={closeSelectedFeedHandler}
-    />
+<FeedLightbox
+    show={Object.keys(selectedFeed).length > 0}
+    hideFavouriteButton={true}
+    {selectedFeed}
+    on:close={closeSelectedFeedHandler}
+/>
 
-    <PageJumbotron
-        caption="Favourites"
-        subcaption={favouriteList.length === 0 ? "No favourite added." : ""}
-    />
+<PageJumbotron
+    caption="Favourites"
+    subcaption={favouriteList.length === 0 ? "No favourite added." : ""}
+/>
 
-    <FavouritesGrid>
-        {#each favouriteList as feedData}
-            <FavouritesItem
-                {feedData}
-                on:remove={() =>
-                    showRemoveFromFavouritePopupHandler(feedData.id)}
-                on:viewFeed={() => viewFeedHandler(feedData)}
-            />
-        {/each}
-    </FavouritesGrid>
-</Layout>
+<FavouritesGrid>
+    {#each favouriteList as feedData}
+        <FavouritesItem
+            {feedData}
+            on:remove={() => showRemoveFromFavouritePopupHandler(feedData.id)}
+            on:viewFeed={() => viewFeedHandler(feedData)}
+        />
+    {/each}
+</FavouritesGrid>

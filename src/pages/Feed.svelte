@@ -6,7 +6,6 @@
     import FeedGridItem from "../components/Feed/FeedGridItem.svelte";
     import FeedLightbox from "../components/Feed/FeedLightbox.svelte";
     import PageJumbotron from "../components/Shared/PageJumbotron.svelte";
-    import Layout from "../components/Layout.svelte";
     import VisibilityDetect from "../components/Hidden/VisibilityDetect.svelte";
     import { searchQuery } from "../searchQuery-store";
 
@@ -21,15 +20,22 @@
     onMount(() => {
         fetchFeedHandler();
 
-        searchQuery.subscribe((searchQuery) => {
-            if (searchQuery.submitted) {
-                document.documentElement.scrollTop = 0;
-                currentPage = 1;
-
-                feedSearchQuery = searchQuery.query;
-                fetchFeedHandler(searchQuery.query);
-            }
+        searchQuery.update((prevSearchQuery) => {
+            return {
+                ...prevSearchQuery,
+                showSearch: true,
+            };
         });
+    });
+
+    searchQuery.subscribe((searchQuery) => {
+        if (searchQuery.submitted) {
+            document.documentElement.scrollTop = 0;
+            currentPage = 1;
+
+            feedSearchQuery = searchQuery.query;
+            fetchFeedHandler(searchQuery.query);
+        }
     });
 
     function syncPagesState(jsonData) {
@@ -103,45 +109,43 @@
     }
 </script>
 
-<Layout showSearch={true}>
-    {#if feedSearchQuery.trim() === ""}
-        <PageJumbotron
-            caption="Gallery feed"
-            subcaption="Our collections of quality photos!"
-        />
-    {:else}
-        <div class="search-caption">
-            <h1>Search results for "{feedSearchQuery.trim()}"</h1>
-        </div>
-    {/if}
-
-    <FeedLightbox
-        show={Object.keys(selectedFeed).length > 0}
-        {selectedFeed}
-        on:close={closeSelectedFeedHandler}
+{#if feedSearchQuery.trim() === ""}
+    <PageJumbotron
+        caption="Gallery feed"
+        subcaption="Our collections of quality photos!"
     />
-
-    <div class="wrapper">
-        {#if initialLoading}
-            <Spinner />
-        {:else}
-            <FeedGrid>
-                {#each photoFeed as photo}
-                    <FeedGridItem
-                        src={photo.src.medium}
-                        alt={photo.alt}
-                        on:click={() => viewFeedHandler(photo)}
-                    />
-                {/each}
-            </FeedGrid>
-
-            {#if lazyLoading}
-                <Spinner />
-            {/if}
-            <VisibilityDetect on:visible={lazyLoadHandler} />
-        {/if}
+{:else}
+    <div class="search-caption">
+        <h1>Search results for "{feedSearchQuery.trim()}"</h1>
     </div>
-</Layout>
+{/if}
+
+<FeedLightbox
+    show={Object.keys(selectedFeed).length > 0}
+    {selectedFeed}
+    on:close={closeSelectedFeedHandler}
+/>
+
+<div class="wrapper">
+    {#if initialLoading}
+        <Spinner />
+    {:else}
+        <FeedGrid>
+            {#each photoFeed as photo}
+                <FeedGridItem
+                    src={photo.src.medium}
+                    alt={photo.alt}
+                    on:click={() => viewFeedHandler(photo)}
+                />
+            {/each}
+        </FeedGrid>
+
+        {#if lazyLoading}
+            <Spinner />
+        {/if}
+        <VisibilityDetect on:visible={lazyLoadHandler} />
+    {/if}
+</div>
 
 <style>
     .search-caption {
