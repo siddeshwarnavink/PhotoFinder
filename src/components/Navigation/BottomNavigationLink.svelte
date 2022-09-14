@@ -44,7 +44,7 @@
     }
 
     :global(a.active) .nav-link {
-        color: #EC8147;
+        color: var(--primaryColor);
         font-weight: bold;
     }
 

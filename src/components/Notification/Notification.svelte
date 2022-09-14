@@ -11,7 +11,7 @@
         padding: 10px 12px;
         color: #000;
         font-weight: bold;
-        background-color: #EC8147;
+        background-color: var(--primaryColor);
         margin-bottom: 12px;
         border-radius: 10px;
         z-index: 300;
