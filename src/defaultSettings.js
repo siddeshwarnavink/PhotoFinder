@@ -1,6 +1,6 @@
 const defaultSettings = [
-    { id: "show-popup-unfavourite", label: "Show popup when unfavourite photo", value: true },
-    { id: "dark-mode", label: "Dark mode", value: false },
+    { id: "show-popup-unfavourite", labelKey: "unfavouriteShowPopup", value: true },
+    { id: "dark-mode", labelKey: "darkMode", value: false },
 ];
 
 export default defaultSettings;

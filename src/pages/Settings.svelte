@@ -29,7 +29,7 @@
 <SettingsWrapper>
     {#each settingsList as settingItem}
         <SettingItem
-            label={settingItem.label}
+            labelKey={settingItem.labelKey}
             settingCode={settingItem.id}
             value={settingItem.value}
         />

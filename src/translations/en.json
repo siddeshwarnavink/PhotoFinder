@@ -11,7 +11,11 @@
         "subcaption": "Our collections of quality photos!"
     },
     "settingsPage": {
-        "caption": "Settings"
+        "caption": "Settings",
+        "settingOptionsLabel": {
+            "darkMode": "Dark mode",
+            "unfavouriteShowPopup": "Show popup when unfavourite photo"
+        }
     },
     "favouritesPage": {
         "caption": "Favourites",

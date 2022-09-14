@@ -1,9 +1,11 @@
 <script>
+    import { _ } from "svelte-i18n";
+
     import ToggleSwitch from "../Shared/ToggleSwitch.svelte";
     import { updateSetting } from "../../settings-store";
 
     export let settingCode;
-    export let label;
+    export let labelKey;
     export let value;
 
     function settingOnChangeHandler(event) {
@@ -12,7 +14,9 @@
 </script>
 
 <div class="setting-item">
-    <span class="setting-label">{label}</span>
+    <span class="setting-label"
+        >{$_(`settingsPage.settingOptionsLabel.${labelKey}`)}</span
+    >
 
     <div style="flex: 1;" />
 
