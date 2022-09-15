@@ -1,4 +1,4 @@
-# live-queue-app
+# PhotoFinder
 A collection of quality photo
 
 ![Project banner](./md_assets/PhotoFinder-Banner.jpg)
